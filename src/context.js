@@ -19,10 +19,10 @@ const createContext = async () =>{
     const accountService = new AccountService(accountRepository);
     return {
         repositories: {
-            account: accountRepository
+            account: accountRepository,
         },
         services: {
-            account:accountService
+            account:accountService,
         }
     }
 };
