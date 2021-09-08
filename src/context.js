@@ -1,7 +1,7 @@
 import Knex from 'knex';
 import 'dotenv/config';
-import AccountRepository from './domain/account/repository';
-import AccountService from './domain/account/service';
+import AccountRepository from './domain/account/repository.js';
+import AccountService from './domain/account/service.js';
 
 const createContext = async () =>{
     const knex = Knex({

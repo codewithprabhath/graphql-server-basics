@@ -1,4 +1,5 @@
-import { gql, makeExecutableSchema } from 'apollo-server';
+import { makeExecutableSchema } from '@graphql-tools/schema';
+import { gql } from 'apollo-server';
 import merge from 'lodash.merge';
 
 const defaultTypeDefs = gql`
