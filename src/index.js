@@ -2,11 +2,18 @@ import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import createSchema from './graphql/index.js';
 import createContext from './context.js';
+import { ApolloServerPluginLandingPageGraphQLPlayground,
+    ApolloServerPluginLandingPageDisabled } from 'apollo-server-core';
 
 const port = /^\d+$/.test(process.env.PORT) ? Number(process.env.PORT) : 4000;
 (async () => {
     const context = await createContext();
     const server = new ApolloServer({
+        plugins: [
+            process.env.NODE_ENV === 'production'
+                ? ApolloServerPluginLandingPageDisabled()
+                : ApolloServerPluginLandingPageGraphQLPlayground(),
+        ],
         schema: createSchema(),
         context: async () => {
             return {

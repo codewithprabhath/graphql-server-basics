@@ -1,15 +1,15 @@
 import { gql } from 'apollo-server';
-import { DateTimeMock, EmailAddressMock } from 'graphql-scalars';
+import { DateTimeResolver, EmailAddressResolver } from 'graphql-scalars';
 
 const typeDefs = gql`
-    scalar DateTimeMock
-    scalar EmailAddressMock
+    scalar DateTime
+    scalar EmailAddress
 
     type Account {
         userId: Int!
         email: String!
-        createdAt: DateTimeMock!
-        updatedAt: DateTimeMock
+        createdAt: DateTime!
+        updatedAt: DateTime
         profile: Profile!
     }
     type Profile {
@@ -17,11 +17,11 @@ const typeDefs = gql`
         firstName: String!
         lastName: String!
         middleName: String
-        createdAt: DateTimeMock!
-        updatedAt: DateTimeMock
+        createdAt: DateTime!
+        updatedAt: DateTime
     }
     input CreateAccountInput {
-        email: EmailAddressMock!
+        email: EmailAddress!
         password: String
         firstName: String!
         lastName: String!
@@ -36,8 +36,8 @@ const typeDefs = gql`
 `;
 
 const resolvers = {
-    DateTimeMock,
-    EmailAddressMock,
+    DateTime: DateTimeResolver,
+    EmailAddress: EmailAddressResolver,
     Account: {
         async profile(account, __, { services }) {
             return services.account.findProfile(account.userId);
